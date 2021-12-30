@@ -1,0 +1,47 @@
+:root {
+  --gray-color: #f4f4f4;
+  --text-color: #222;
+  --font: 'Roboto', sans-serif;
+  --nav-height: 4rem;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: var(--font);
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  color: var(--text-color);
+  overflow-x: hidden;
+  background-color: #FFFFFF;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+p {
+  color: var(--text-color);
+}
+
+button {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}

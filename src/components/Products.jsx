@@ -1,12 +1,32 @@
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Product from './Product';
+import Loader from './Loader';
 
-const Products = ({ products }) => {
+const ProductsContainer = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  min-height: calc(100vh - var(--nav-height));
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  gap: 1rem;
+`;
+
+const Products = ({ products, showDetails }) => {
   return(
-    <section>
+    <ProductsContainer>
+      <Loader id="loader" />
+
       {products.map((product) => (
-        <Product key={product.id} product={product} />
+        <Link to="/detalle" key={product.id} onClick={() => showDetails(product)}>
+          <Product product={product} />
+        </Link>
       ))}
-    </section>
+    </ProductsContainer>
+
   );
 }
 
