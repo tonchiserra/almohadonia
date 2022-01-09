@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { Navigate } from 'react-router-dom';
-import Button from './Button';
+import Button from './ui/Button';
 
 const fly = keyframes`
   from {
@@ -81,7 +81,7 @@ const DetailsContainer = styled.div`
   }
 `;
 
-const DetailsProduct = ({ details }) => {
+const DetailsProduct = ({ details, onAddToCart }) => {
 
   if(!details) return <Navigate to="/" />
 
@@ -98,7 +98,7 @@ const DetailsProduct = ({ details }) => {
         <p className="price">{details.price.formatted_with_symbol}</p>
         <div className="btns">
           <Button secondary >COMPRAR AHORA</Button>
-          <Button>AÑADIR AL CARRITO</Button>
+          <Button onClick={() => onAddToCart(details.id, 1)}>AÑADIR AL CARRITO</Button>
         </div>
       </div>
     </DetailsContainer>

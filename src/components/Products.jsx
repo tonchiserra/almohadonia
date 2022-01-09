@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Product from './Product';
-import Loader from './Loader';
 
 const ProductsContainer = styled.section`
   display: flex;
@@ -18,13 +17,13 @@ const ProductsContainer = styled.section`
 const Products = ({ products, showDetails }) => {
   return(
     <ProductsContainer>
-      <Loader id="loader" />
-
+      
       {products.map((product) => (
         <Link to="/detalle" key={product.id} onClick={() => showDetails(product)}>
           <Product product={product} />
         </Link>
       ))}
+
     </ProductsContainer>
 
   );

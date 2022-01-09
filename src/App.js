@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import { commerce } from './lib/commerce';
 
+import Loader from './components/ui/Loader';
 import Navbar from './components/Navbar';
 import Products from './components/Products';
 import DetailsProduct from './components/DetailsProduct';
 import Cart from './components/Cart';
+import Footer from './components/Footer';
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [details, setDetails] = useState();
+  const [cart, setCart] = useState({});
 
   const fetchProducts = async () => {
     document.getElementById("loader").style.display = "block";
@@ -19,8 +22,36 @@ const App = () => {
     document.getElementById("loader").style.display = "none";
   }
 
+  const fetchCart = async () => {
+    document.getElementById("loader").style.display = "block";
+    setCart(await commerce.cart.retrieve());
+    document.getElementById("loader").style.display = "none";
+  }
+  
+  const handleAddToCart = async (productId, quantity) => {
+    document.getElementById("loader").style.display = "block";
+    const { cart } = await commerce.cart.add(productId, quantity);
+    setCart(cart);
+    document.getElementById("loader").style.display = "none";
+  }
+
+  const handleUpdateCartQty = async (productId, quantity) => {
+    document.getElementById("loader").style.display = "block";
+    const { cart } = await commerce.cart.update(productId, {quantity});
+    setCart(cart);
+    document.getElementById("loader").style.display = "none";
+  }
+
+  const handleRemoveFromCart = async (productId) => {
+    document.getElementById("loader").style.display = "block";
+    const { cart } = await commerce.cart.remove(productId);
+    setCart(cart);
+    document.getElementById("loader").style.display = "none";
+  }
+
   useEffect(() => {
     fetchProducts();
+    fetchCart();
   }, []);
 
   const showDetails = (product) => {
@@ -29,15 +60,20 @@ const App = () => {
 
   return(
     <Router>
-      <div>
-        <Navbar />
+      <div className='app-container'>
+        <Loader id="loader" />
+
+        <Navbar totalItems={cart.total_items} />
 
         <Routes>
-          <Route exact path="/" element={<Products products={products} showDetails={showDetails} />} />
-          <Route exact path="/detalle" element={<DetailsProduct details={details} />} />
-          <Route exact path="/carrito" element={<Cart />} />    
+          <Route exact path="/" element={<Navigate to="/productos" />} />
+          <Route exact path="/productos" element={<Products products={products} showDetails={showDetails} />} />
+          <Route exact path="/detalle" element={<DetailsProduct details={details} onAddToCart={handleAddToCart} />} />
+          <Route exact path="/carrito" element={<Cart cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} />} />    
         </Routes>
-             
+
+        <Footer />
+
       </div>
     </Router>
   );

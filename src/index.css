@@ -1,4 +1,5 @@
 :root {
+  --first-color: #408499;
   --gray-color: #f4f4f4;
   --text-color: #222;
   --font: 'Roboto', sans-serif;
@@ -44,4 +45,9 @@ button {
   border: none;
   outline: none;
   font-size: 1rem;
+  cursor: pointer;
+}
+
+.app-container {
+  position: relative;
 }
