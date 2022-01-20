@@ -55,7 +55,31 @@ const App = () => {
   }, []);
 
   const showDetails = (product) => {
-    setDetails(product)
+    setDetails(product);
+  }
+
+  const applyFilter = (orderBy) => {
+    let p = products.slice();
+    switch (orderBy){
+      case 'priceAsc':
+        //ordenar de menor a mayor
+        p.sort(function(a,b){
+          return (a.price.raw - b.price.raw)
+        });
+        setProducts(p);
+        break;
+      case 'priceDesc': 
+        //ordenar de mayor a menor
+        p.sort(function(a,b){
+          return (b.price.raw - a.price.raw)
+        });
+        setProducts(p);
+        break;
+      default: 
+        //sin ordenar (por defecto)
+        fetchProducts();
+        break;
+    }
   }
 
   return(
@@ -67,7 +91,7 @@ const App = () => {
 
         <Routes>
           <Route exact path="/" element={<Navigate to="/productos" />} />
-          <Route exact path="/productos" element={<Products products={products} showDetails={showDetails} />} />
+          <Route exact path="/productos" element={<Products products={products} showDetails={showDetails} applyFilter={applyFilter} />} />
           <Route exact path="/detalle" element={<DetailsProduct details={details} onAddToCart={handleAddToCart} />} />
           <Route exact path="/carrito" element={<Cart cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} />} />    
         </Routes>

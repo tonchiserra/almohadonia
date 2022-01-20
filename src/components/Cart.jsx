@@ -45,6 +45,21 @@ const CartContainer = styled.div`
     font-size: 1.5rem;
     font-weight: bold;
   }
+
+  .no-products-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .no-products-container a {
+    color: #408499;
+  }
+
+  .no-products-container a:hover {
+    opacity: .75;
+  }
 `;
 
 const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart }) => {
@@ -56,7 +71,9 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart }) => {
       <h2>Carrito</h2>
       
       {cart.total_items === 0 
-        ? <p>Tu carrito está vacío. <Link to="/productos">Comienza a llenarlo</Link>.</p> 
+        ? <div className="no-products-container">
+            <p>Tu carrito está vacío. <Link to="/productos">Comienza a llenarlo</Link>.</p>
+          </div> 
         : <section className="product-list">
             {cart.line_items.map(item => ( <CartProduct key={item.id} item={item} onUpdateCartQty={onUpdateCartQty} onRemoveFromCart={onRemoveFromCart} />))}
           </section>
@@ -67,7 +84,7 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart }) => {
           <div>
             <p>Subtotal: {cart.subtotal.formatted_with_symbol}</p>
           </div>
-          <Button>Check out</Button>
+          <Button><span>CHECK OUT</span></Button>
         </div>
       </div>
     </CartContainer>

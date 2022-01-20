@@ -14,6 +14,7 @@ Entre las tecnologías que se utilizaron se encuentran:
 ### Librerías y Frameworks
 * React.js
 * Styled-Components
+* Formik
 
 ### Otros
 * Commerce.js

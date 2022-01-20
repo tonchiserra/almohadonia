@@ -16,13 +16,13 @@ const DetailsContainer = styled.div`
   background-color: #ffffff;
   min-height: calc(100vh - var(--nav-height));
   max-width: 1200px;
-  margin: auto;
   position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 
   .left {
-    position: absolute;
-    top: 0;
-    right: 60vw;
     margin-top: 3rem;
     height: inherit;
     display: flex;
@@ -44,10 +44,6 @@ const DetailsContainer = styled.div`
   }
 
   .right {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60vw;
     margin-top: 3rem;
     padding-left: 6rem;
     display: flex;
@@ -83,7 +79,7 @@ const DetailsContainer = styled.div`
 
 const DetailsProduct = ({ details, onAddToCart }) => {
 
-  if(!details) return <Navigate to="/" />
+  if(!details) return <Navigate to="/productos" />
 
   return(
     <DetailsContainer>
@@ -97,8 +93,8 @@ const DetailsProduct = ({ details, onAddToCart }) => {
         <p className="desc">{details.description}</p>
         <p className="price">{details.price.formatted_with_symbol}</p>
         <div className="btns">
-          <Button secondary >COMPRAR AHORA</Button>
-          <Button onClick={() => onAddToCart(details.id, 1)}>AÑADIR AL CARRITO</Button>
+          <Button secondary ><span>COMPRAR AHORA</span></Button>
+          <Button onClick={() => onAddToCart(details.id, 1)}><span>AÑADIR AL CARRITO</span></Button>
         </div>
       </div>
     </DetailsContainer>
