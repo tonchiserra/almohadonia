@@ -9,6 +9,7 @@ import Products from './components/Products';
 import DetailsProduct from './components/DetailsProduct';
 import Cart from './components/Cart';
 import Footer from './components/Footer';
+import NotFound from './components/NotFound';
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -61,22 +62,19 @@ const App = () => {
   const applyFilter = (orderBy) => {
     let p = products.slice();
     switch (orderBy){
-      case 'priceAsc':
-        //ordenar de menor a mayor
+      case 'priceAsc':  //ordenar de menor a mayor
         p.sort(function(a,b){
           return (a.price.raw - b.price.raw)
         });
         setProducts(p);
         break;
-      case 'priceDesc': 
-        //ordenar de mayor a menor
+      case 'priceDesc': //ordenar de mayor a menor
         p.sort(function(a,b){
           return (b.price.raw - a.price.raw)
         });
         setProducts(p);
         break;
-      default: 
-        //sin ordenar (por defecto)
+      default: //sin ordenar (por defecto)
         fetchProducts();
         break;
     }
@@ -90,6 +88,8 @@ const App = () => {
         <Navbar totalItems={cart.total_items} />
 
         <Routes>
+          <Route path="*" element={<NotFound />} />
+
           <Route exact path="/" element={<Navigate to="/productos" />} />
           <Route exact path="/productos" element={<Products products={products} showDetails={showDetails} applyFilter={applyFilter} />} />
           <Route exact path="/detalle" element={<DetailsProduct details={details} onAddToCart={handleAddToCart} />} />

@@ -48,6 +48,10 @@ const StyledField = styled(Field)`
   margin: 0;
   padding: 0 .5rem 0 0;
   font-size: 14px;
+
+  & #search-1 {
+    display: none;
+  }
 `;
 
 const SearchInput = () => {

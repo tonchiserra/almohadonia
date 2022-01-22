@@ -35,7 +35,7 @@ const Header = styled.header`
     transition: all 300ms ease-in-out;
     height: 2.5rem;
     width: 2.5rem;
-    border-radius: 100%;
+    border-radius: 999px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,6 +66,10 @@ const Header = styled.header`
     opacity: .75;
   }
 
+  & .search {
+    display: none;
+  }
+
   @media screen and (min-width: 1200px){
     & .container {
       padding: 0;
@@ -73,6 +77,10 @@ const Header = styled.header`
 
     & .menu-btn {
       display: none;
+    }
+
+    & .search {
+      display: unset;
     }
   }
 
@@ -167,6 +175,7 @@ const Navbar = ({ totalItems }) => {
       <div className="container">
         <button className="menu-btn" onClick={() => handleMenu('0')}><img src={BarsIcon} alt="Menu" /></button>
         <Link to="/"><h1>Almohadonia</h1></Link>
+        <div className="search"><SearchInput /></div>
         <Link to="/carrito"><CartBtn totalItems={totalItems} /></Link>
       </div>
 
@@ -176,7 +185,7 @@ const Navbar = ({ totalItems }) => {
           <button className="menu-btn" onClick={() => handleMenu('-100vw')}><img src={CrossIcon} alt="Menu" /></button>
         </div>
         <nav>
-          <Link to="/">Productos</Link>
+          <Link to="/productos">Productos</Link>
           <Link to="/">Cuenta</Link>
           <Link to="/">Favoritos</Link>
           <Link to="/">Acerca</Link>
@@ -184,27 +193,6 @@ const Navbar = ({ totalItems }) => {
       </Menu>
     </Header>
   );
-
-  /*return(
-    <Header>
-      <div className="containerTop">
-        <Link to="/"><h1>Almohadonia</h1></Link>
-
-        <SearchInput />
-
-        <Link to="/carrito"><CartBtn totalItems={totalItems} /></Link>
-      </div>
-
-      <div className="containerBottom">
-        <nav>
-          <Link to="/">Productos</Link>
-          <Link to="/">Cuenta</Link>
-          <Link to="/">Favoritos</Link>
-          <Link to="/">Acerca</Link>
-        </nav>
-      </div>
-    </Header>
-  );*/
 }
 
 export default Navbar;

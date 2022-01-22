@@ -7,7 +7,7 @@ const ProductsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: calc(100vh - var(--nav-height));
+  min-height: calc(100vh - var(--nav-height) - 4rem);
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem 1rem 0 1rem;

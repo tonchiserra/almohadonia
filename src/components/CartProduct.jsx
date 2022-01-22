@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 const StyledCartProduct = styled.article`
-  display: grid;
-  grid-template-columns: .3fr 1fr 2.2fr 1fr .5fr;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
-  height: 5rem;
+  height: max-content;
   width: 100%;
-  padding: 0 1rem;
+  padding: 0;
   border-bottom: 1px solid #c4c4c4;
 
   & button {
@@ -28,7 +30,7 @@ const StyledCartProduct = styled.article`
   }
 
   & img {
-    height: 100%;
+    height: 5rem;
   }
 
   & h5 {
@@ -45,6 +47,13 @@ const StyledCartProduct = styled.article`
 
   .price {
     text-align: right;
+  }
+
+  @media screen and (min-width: 1200px){
+    display: grid;
+    grid-template-columns: .3fr 1fr 2.2fr 1fr .5fr;
+    height: 5rem;
+    padding: 0 1rem;
   }
 `;
 

@@ -4,10 +4,10 @@ import CartProduct from './CartProduct';
 import Button from './ui/Button';
 
 const CartContainer = styled.div`
-  min-height: calc(100vh - var(--nav-height));
+  min-height: calc(100vh - var(--nav-height) - 4rem);
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 0 0 0 ;
+  padding: 2rem 1rem 0 1rem ;
 
   & > h2 {
     font-size: 2rem;
@@ -27,7 +27,7 @@ const CartContainer = styled.div`
     left: 0;
     width: 100%;
     background-color: #FFFFFF;
-    box-shadow: 0px -8px 16px rgba(0,0,0,0.2);
+    border-top: 1px solid #c4c4c4;
   }
 
   .subtotal-container {
@@ -42,8 +42,8 @@ const CartContainer = styled.div`
   }
   
   .subtotal-container p {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1.3rem;
+    font-weight: normal;
   }
 
   .no-products-container {
@@ -59,6 +59,16 @@ const CartContainer = styled.div`
 
   .no-products-container a:hover {
     opacity: .75;
+  }
+
+  @media screen and (min-width: 1200px){
+    & {
+      padding: 2rem 0 0 0 ;
+    }
+
+    .subtotal-container p {
+      font-weight: bold;
+    }
   }
 `;
 
