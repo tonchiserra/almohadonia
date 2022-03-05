@@ -3,21 +3,7 @@
   --gray-color: #f4f4f4;
   --text-color: #222;
   --font: 'Roboto', sans-serif;
-  --nav-height: 4rem;
-}
-
-/*-- Tablet --*/
-@media screen and (min-width: 500px){
-  :root {
-    --nav-height: 4rem;
-  }
-}
-
-/*-- Desktop --*/
-@media screen and (min-width: 1200px){
-  :root {
-    --nav-height: 5.5rem;
-  }
+  --nav-height: 5rem;
 }
 
 html {
@@ -37,7 +23,7 @@ body {
   margin: 0;
   color: var(--text-color);
   overflow-x: hidden;
-  background-color: #FFFFFF;
+  background-color: #fff;
 }
 
 a {

@@ -7,6 +7,9 @@ const FooterContainer = styled.footer`
   justify-content: center;
   align-items: center;
   height: 4rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 
   & > p {
     color: #fff;

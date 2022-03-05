@@ -16,6 +16,7 @@ const StyledCartBtn = styled.div`
 
   & > div {
     position: relative;
+    line-height:0;
   }
 `;
 
@@ -26,6 +27,7 @@ const BubbleAlert = styled.div`
   width: max-content;
   padding: .25rem;
   height: 16px;
+  width: 16px;
   display: flex;
   justify-content: center;
   align-items: center;

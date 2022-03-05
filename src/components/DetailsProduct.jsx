@@ -1,6 +1,8 @@
 import styled, { keyframes } from "styled-components";
 import { Navigate } from 'react-router-dom';
+
 import Button from './ui/Button';
+import FavButton from './ui/FavButton';
 
 const fly = keyframes`
   from {
@@ -13,7 +15,7 @@ const fly = keyframes`
 `;
 
 const DetailsContainer = styled.div`
-  background-color: #ffffff;
+  background-color: #fff;
   min-height: calc(100vh - var(--nav-height) - 4rem);
   max-width: 1200px;
   position: relative;
@@ -21,9 +23,10 @@ const DetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 14rem; //13(price-container) + 1 de espacio
 
   .left {
-    margin-top: 3rem;
+    margin-top: 2rem;
     height: inherit;
     display: flex;
   }
@@ -31,12 +34,13 @@ const DetailsContainer = styled.div`
   .img-container {
     height: 50vh;
     width: 90vw;
-    border-radius: 20px;
+    border-radius: 5px;
     background-color: #A1E3F8;
     background: -prefix-linear-gradient(top, #A1E3F8, transparent);
     background: linear-gradient(to bottom, #408499, transparent);
     display: flex;
     justify-content: center;
+    position: relative;
   }
 
   .img-container > img {
@@ -45,12 +49,13 @@ const DetailsContainer = styled.div`
   }
 
   .right {
-    margin-top: 3rem;
-    padding: 0;
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap: 1rem;
+    padding: 0 1rem;
+    width: 100%;
   }
 
   .title {
@@ -60,14 +65,44 @@ const DetailsContainer = styled.div`
   }
 
   .desc {
+    padding: 0;
+    margin: 0;
+  }
+
+  .desc * {
     font-size: 1rem;
     color: #777777;
     padding: 0;
     margin: 0;
   }
 
+  .desc ul {
+    margin: 0 0 0 1rem;
+  }
+
+  .desc ul li p {
+    padding: .3rem 0;
+  }
+
+  .price-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 13rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    background-color: #ffffff;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 0 1.3rem #88888822;
+  }
+
   .price {
-    font-size: 2rem;
+    font-size: 1.6rem;
     padding: 0;
     margin: 0;
   }
@@ -77,7 +112,6 @@ const DetailsContainer = styled.div`
     flex-direction: column;
     gap: .5rem;
     width: 100%;
-    margin-bottom: 5rem;
   }
 
   .btns > * {
@@ -88,6 +122,7 @@ const DetailsContainer = styled.div`
     & {
       flex-direction: row;
       justify-content: center;
+      gap: 3rem;
       align-items: unset;
       padding: 0 1rem;
     }
@@ -98,12 +133,32 @@ const DetailsContainer = styled.div`
     }
 
     .right {
-      padding-left: 3rem;
+      padding: 1rem;
       gap: 2rem;
+      background-color: #f4f4f4;
+      border: 1px solid #c4c4c4;
+      border-radius: 5px;
+      justify-content: space-between;
+      height: max-content;
     }
 
     .title {
       font-size: 3rem; 
+    }
+
+    .price-container {
+      position: unset;
+      bottom: unset;
+      left: unset;
+      height: unset;
+      padding: 0;
+      flex-direction: column;
+      align-items: unset;
+      justify-content: center;
+      gap: 2rem;
+      border-radius: 0;
+      box-shadow: none;
+      background-color: transparent;
     }
 
     .btns {
@@ -115,10 +170,15 @@ const DetailsContainer = styled.div`
   @media screen and (min-width: 1200px){
     & {
       padding: 0;
+      gap: 6rem;
     }
 
     .right {
-      padding-left: 6rem;
+      width: max-content;
+    }
+
+    .btns {
+      min-width: 500px;
     }
   }
 `;
@@ -131,18 +191,22 @@ const DetailsProduct = ({ details, onAddToCart }) => {
     <DetailsContainer>
       <div className="left">
         <div className="img-container">
+          <FavButton top />
           <img src={details.image.url} alt={details.image.filename} />
         </div>
       </div>
       <div className="right">
         <h2 className="title">{details.name}</h2>
-        <p className="desc">{details.description}</p>
-        <p className="price">{details.price.formatted_with_symbol}</p>
-        <div className="btns">
-          <Button secondary ><span>COMPRAR AHORA</span></Button>
-          <Button onClick={() => onAddToCart(details.id, 1)}><span>AÑADIR AL CARRITO</span></Button>
+        <div className="desc" dangerouslySetInnerHTML={{__html: details.description}}></div>
+        <div className="price-container">
+          <p className="price">{details.price.formatted_with_symbol}</p>
+          <div className="btns">
+            <Button secondary>Comprar ahora</Button>
+            <Button onClick={() => onAddToCart(details.id, 1)}>Añadir al carrito</Button>
+          </div>
         </div>
       </div>
+
     </DetailsContainer>
   );
 }

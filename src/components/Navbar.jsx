@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { Link } from 'react-router-dom';
 
 import CartBtn from './CartBtn';
-import SearchInput from './SearchInput';
 
 import BarsIcon from '../assets/bars.svg';
 import CrossIcon from '../assets/cross.svg';
+import BrandIcon from '../assets/brand.svg';
 
 const Header = styled.header`
   position: sticky;
@@ -13,8 +13,6 @@ const Header = styled.header`
   left: 0;
   height: var(--nav-height);
   width: 100vw;
-  display: flex;
-  flex-direction: column;
   border-bottom: 1px solid #c4c4c4;
   background-color: #fff;
   z-index: 995;
@@ -24,25 +22,30 @@ const Header = styled.header`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     width: 100%;
     max-width: 1200px;
     padding: 0 1rem;
     margin: 0 auto;
-    height: 4rem;
+    height: var(--nav-height);
   }
 
   & .menu-btn {
-    transition: all 300ms ease-in-out;
-    height: 2.5rem;
-    width: 2.5rem;
-    border-radius: 999px;
+    background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    height: 2.5rem;
+    width: 2.5rem;
     padding: 0;
     margin: 0;
-    background-color: transparent;
+    border-radius: 999px;
+    transition: all 300ms ease-in-out;
+    line-height:0;
+  }
+
+  #cross-btn {
+    display: none;
   }
 
   & .menu-btn:hover {
@@ -50,24 +53,20 @@ const Header = styled.header`
   }
 
   & .menu-btn > img {
-    width: 1.5rem;
-    height: 1.5rem;
     margin: 0;
     padding: 0;
   }
 
-  a h1 {
+  .brand {
     color: var(--first-color);
     margin: 0;
     transition: all 300ms ease-in-out;
+    font-size: 1.5rem;
+    height: 4rem;
   }
 
-  a h1:hover {
+  .brand:hover {
     opacity: .75;
-  }
-
-  & .search {
-    display: none;
   }
 
   @media screen and (min-width: 1200px){
@@ -78,27 +77,23 @@ const Header = styled.header`
     & .menu-btn {
       display: none;
     }
-
-    & .search {
-      display: unset;
-    }
   }
 
 `;
 
 const Menu = styled.div`
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: var(--nav-height);
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - var(--nav-height));
   background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
-  padding: 0 0 1rem 0;
+  padding: 1rem 0;
   transform: translateX(-100vw);
   transition: all 300ms ease-in-out;
 
@@ -126,25 +121,21 @@ const Menu = styled.div`
   @media screen and (min-width: 1200px){
     & {
       position: unset;
-      width: 100%;
-      max-width: 1200px;
-      height: 1.5rem;
-      display: unset;
+      width: max-content;
+      height: 3rem;
+      flex-direction: row;
+      align-items: center;
       gap: unset;
       padding: 0;
       margin: 0 auto;
       transform: unset;
     }
 
-    & > .container {
-      display: none;
-    }
-
     & > nav {
       flex-direction: row;
       align-items: center;
       width: unset;
-      gap: 1rem;
+      gap: 2rem;
     }
 
     & > nav > a {
@@ -152,8 +143,8 @@ const Menu = styled.div`
       width: unset;
       text-align: unset;
       background-color: unset;
-      font-size: 14px;
-      font-weight: normal;
+      font-size: 1rem;
+      color: #222;
     }
 
     & > nav > a:hover {
@@ -167,30 +158,44 @@ const Navbar = ({ totalItems }) => {
 
   const handleMenu = (n) => {
     let $menu = document.getElementById("menu");
-    $menu.style.transform = `translate(${n})`
+    let $barsBtn = document.getElementById("bars-btn");
+    let $crossBtn = document.getElementById("cross-btn");
+
+    if(n === '0'){
+      $barsBtn.style.display = 'none'
+      $crossBtn.style.display = 'unset'
+    }else{
+      $barsBtn.style.display = 'unset'
+      $crossBtn.style.display = 'none'
+    }
+
+    $menu.style.transform = `translate(${n})`;
+
+    document.addEventListener("click", (e) => {
+      if(!e.target.matches("#link")) return false;
+      $menu.style.transform = 'translate(-100vw)';
+    })
   }
 
   return(
     <Header>
       <div className="container">
-        <button className="menu-btn" onClick={() => handleMenu('0')}><img src={BarsIcon} alt="Menu" /></button>
-        <Link to="/"><h1>Almohadonia</h1></Link>
-        <div className="search"><SearchInput /></div>
+        <button id="bars-btn" className="menu-btn" onClick={() => handleMenu('0')}><img src={BarsIcon} alt="Menu" /></button>
+        <button id="cross-btn" className="menu-btn" onClick={() => handleMenu('-100vw')}><img src={CrossIcon} alt="Menu" /></button>
+        
+        <Link to="/"><img className="brand" src={BrandIcon} alt="Almohadonia" /></Link>
+
+        <Menu id="menu">
+          <nav>
+            <Link id="link" to="/productos">Productos</Link>
+            <Link id="link" to="/cuenta">Cuenta</Link>
+            <Link id="link" to="/favoritos">Favoritos</Link>
+            <Link id="link" to="/acerca">Acerca</Link>
+          </nav>
+        </Menu>
+
         <Link to="/carrito"><CartBtn totalItems={totalItems} /></Link>
       </div>
-
-      <Menu id="menu">
-        <div className="container">
-          <SearchInput />
-          <button className="menu-btn" onClick={() => handleMenu('-100vw')}><img src={CrossIcon} alt="Menu" /></button>
-        </div>
-        <nav>
-          <Link to="/productos">Productos</Link>
-          <Link to="/">Cuenta</Link>
-          <Link to="/">Favoritos</Link>
-          <Link to="/">Acerca</Link>
-        </nav>
-      </Menu>
     </Header>
   );
 }

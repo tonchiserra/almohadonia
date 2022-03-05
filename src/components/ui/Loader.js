@@ -11,16 +11,16 @@ const spin = keyframes`
 `;
 
 const Loader = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(255,255,255,0.7);
   width: 100vw;
   height: 100vh;
   z-index: 997;
   display: none;
 
-  &::before {
+  /*::before {
     content: "";
     background-color: #fff;
     width: 150px;
@@ -33,13 +33,13 @@ const Loader = styled.div`
     right: 0;
     margin: auto;
     z-index: 998;
-  }
+  }*/
   
   &::after {
     content: "";
-    border: 8px solid rgba(0,0,0,0.1);
-    width: 100px;
-    height: 100px;
+    border: 6px solid rgba(0,0,0,0.1);
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border-left-color: #408499;
     animation: ${spin} 1s ease infinite;

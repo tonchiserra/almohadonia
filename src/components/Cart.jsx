@@ -1,33 +1,43 @@
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
+
 import CartProduct from './CartProduct';
 import Button from './ui/Button';
 
 const CartContainer = styled.div`
-  min-height: calc(100vh - var(--nav-height) - 4rem);
-  max-width: 1200px;
+  min-height: calc(100vh - var(--nav-height));
+  max-width: 600px;
   margin: 0 auto;
-  padding: 2rem 1rem 0 1rem ;
+  padding: 1rem;
+  padding-bottom: 7rem;
+  background-color: #fff;
 
   & > h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: normal;
     padding: 0;
     margin: 0 0 1rem 0;
+    text-align: center;
+    font-weight: bold;
   }
 
   .product-list {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
   }
 
   .subtotal {
     position: fixed;
     bottom: 0;
     left: 0;
+    right: 0;
+    margin: 0 auto;
     width: 100%;
-    background-color: #FFFFFF;
-    border-top: 1px solid #c4c4c4;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 0 1.3rem #88888822;
   }
 
   .subtotal-container {
@@ -35,15 +45,19 @@ const CartContainer = styled.div`
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
-    height: 4rem;
+    height: 8rem;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    gap: .5rem;
   }
   
   .subtotal-container p {
     font-size: 1.3rem;
     font-weight: normal;
+    margin: 0;
+    padding: 0;
   }
 
   .no-products-container {
@@ -72,6 +86,11 @@ const CartContainer = styled.div`
   }
 `;
 
+const StyledLink = styled(Link)`
+  pointer-events: ${props => props.disabled ? 'none' : 'unset'};
+  width: 100%;
+`;
+
 const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart }) => {
 
   if(!cart.line_items) return null;
@@ -91,10 +110,10 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart }) => {
       
       <div className="subtotal">
         <div className="subtotal-container">
-          <div>
-            <p>Subtotal: {cart.subtotal.formatted_with_symbol}</p>
-          </div>
-          <Button><span>CHECK OUT</span></Button>
+          <p>Subtotal: {cart.subtotal.formatted_with_symbol}</p>
+          <StyledLink to="/checkout" disabled={cart.total_items <= 0 ? true : false}>
+            <Button disabled={cart.total_items <= 0 ? true : false}>Continuar compra</Button>
+          </StyledLink>
         </div>
       </div>
     </CartContainer>

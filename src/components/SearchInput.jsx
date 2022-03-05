@@ -4,61 +4,81 @@ import { Formik, Form, Field} from 'formik';
 import SearchIcon from '../assets/glass.svg';
 
 const StyledForm = styled(Form)`
-  height: 2rem;
-  width: max-content;
-  background-color: var(--gray-color);
-  border-radius: 5px;
-  padding: 0 1rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 15px;
+  padding: 0;
+  position: relative;
 
   & button {
     background-color: transparent;
-    border-radius: 999px;
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    transition: all 300ms ease-in-out;
-    padding: 0;
+    height: 2rem;
+    width: 2rem;
+    padding: .25;
     margin: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: .5rem;
+    margin: auto;
+    border-radius: 999px;
+    transition: all 300ms ease-in-out;
+    line-height:0;
   }
 
   & button:hover {
-    opacity: .75;
+    background-color: #e6e6e6;
   }
 
   & button img {
-    width: 1.5rem;
-    height: 1.5rem;
     margin: 0;
     padding: 0;
+  }
+
+  @media screen and (min-width: 800px){
+    & {
+      width: 50%;
+    }
   }
 `;
 
 const StyledField = styled(Field)`
   width: 100%;
-  height: 100%;
+  height: 3rem;
   color: #222222;
-  background-color: transparent;
+  background-color: #f4f4f4;
   border: none;
+  border-radius: 5px;
   outline: none;
   margin: 0;
-  padding: 0 .5rem 0 0;
+  padding: 0 3rem 0 .5rem;
   font-size: 14px;
+  border: 1px solid #fff;
+  transition: all 300ms ease-in-out;
 
-  & #search-1 {
-    display: none;
+  &:hover {
+    border: 1px solid #c4c4c4;
+  }
+
+  &:focus {
+    border: 1px solid #c4c4c4;
   }
 `;
 
 const SearchInput = () => {
+
+  const handleSearch = (values) => {
+    let message = `No pudimos encontrar nada sobre "${values.search}" porque esta feature todavía no está implementada. \n\nPerdon :(`;
+    alert(message);
+  }
+
   return(
     <Formik
       initialValues={{ search: ''}}
-      onSubmit={values => console.log(values)} //posteriormente cambiar el console.log por la logica para hacer la busqueda
+      onSubmit={values => handleSearch(values)}
     >
       <StyledForm>
         <StyledField name='search' type='text' placeholder='Buscar...' />

@@ -1,20 +1,40 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+
 import Product from './Product';
+import SearchInput from './SearchInput';
 import ProductsFilter from './ProductsFilter';
+import Footer from './Footer';
 
 const ProductsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: calc(100vh - var(--nav-height) - 4rem);
+  min-height: calc(100vh - var(--nav-height));
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 1rem 0 1rem;
+  padding: 1rem 1rem 4rem 1rem;
+  gap: 1rem;
+  background-color: #fff;
+
+  .filters-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
 
   @media screen and (min-width: 500px){
     & {
       align-items: unset;
+    }
+  }
+
+  @media screen and (min-width: 800px){
+    .filters-container {
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: space-between;
     }
   }
 
@@ -31,7 +51,7 @@ const ProductsList = styled.section`
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  padding: 1rem 0;
+  padding:0 0 5rem 0;
   gap: 1rem;
 
   @media screen and (min-width: 500px){
@@ -40,21 +60,37 @@ const ProductsList = styled.section`
       align-items: unset;
     }
   }
+
+  @media screen and (min-width: 800px){
+    & {
+      display: ${ props => props.horizontal ? 'grid' : 'flex' };
+      grid-template-columns: ${ props => props.horizontal ? '1fr 1fr' : 'unset' };
+    }
+  }
 `;
 
 const Products = ({ products, showDetails, applyFilter }) => {
+  const [horizontal, setHorizontal] = useState(true);
+
+  const applyView = (view) => {
+    setHorizontal(view)
+  }
+
   return(
     <ProductsContainer>
-
-      <ProductsFilter applyFilter={applyFilter} />
+ 
+      <div className='filters-container'>
+        <SearchInput />
+        <ProductsFilter applyFilter={applyFilter} applyView={applyView} />
+      </div>
       
-      <ProductsList>
+      <ProductsList horizontal={horizontal}>
         {products.map((product) => (
-          <Link to="/detalle" key={product.id} onClick={() => showDetails(product)}>
-            <Product product={product} />
-          </Link>
+          <Product key={product.id} product={product} horizontal={horizontal} showDetails={showDetails} />
         ))}
       </ProductsList>
+
+      <Footer />
 
     </ProductsContainer>
 

@@ -8,13 +8,16 @@ import Navbar from './components/Navbar';
 import Products from './components/Products';
 import DetailsProduct from './components/DetailsProduct';
 import Cart from './components/Cart';
-import Footer from './components/Footer';
 import NotFound from './components/NotFound';
+import Checkout from './components/Checkout';
+import Notification from './components/ui/Notification';
+
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [details, setDetails] = useState();
   const [cart, setCart] = useState({});
+  const [message, setMessage] = useState('');
 
   const fetchProducts = async () => {
     document.getElementById("loader").style.display = "block";
@@ -34,6 +37,12 @@ const App = () => {
     const { cart } = await commerce.cart.add(productId, quantity);
     setCart(cart);
     document.getElementById("loader").style.display = "none";
+
+    setMessage('Se añadió exitosamente al carrito');
+    document.getElementById("notification").style.transform = "translateY(0)";
+    setTimeout(function(){
+      document.getElementById("notification").style.transform = "translateY(-12rem)";
+    }, 2000);
   }
 
   const handleUpdateCartQty = async (productId, quantity) => {
@@ -41,6 +50,12 @@ const App = () => {
     const { cart } = await commerce.cart.update(productId, {quantity});
     setCart(cart);
     document.getElementById("loader").style.display = "none";
+
+    setMessage('El carrito se actualizó exitosamente');
+    document.getElementById("notification").style.transform = "translateY(0)";
+    setTimeout(function(){
+      document.getElementById("notification").style.transform = "translateY(-12rem)";
+    }, 2000);
   }
 
   const handleRemoveFromCart = async (productId) => {
@@ -48,6 +63,12 @@ const App = () => {
     const { cart } = await commerce.cart.remove(productId);
     setCart(cart);
     document.getElementById("loader").style.display = "none";
+
+    setMessage('Se eliminó correctamente del carrito');
+    document.getElementById("notification").style.transform = "translateY(0)";
+    setTimeout(function(){
+      document.getElementById("notification").style.transform = "translateY(-12rem)";
+    }, 2000);
   }
 
   useEffect(() => {
@@ -94,9 +115,10 @@ const App = () => {
           <Route exact path="/productos" element={<Products products={products} showDetails={showDetails} applyFilter={applyFilter} />} />
           <Route exact path="/detalle" element={<DetailsProduct details={details} onAddToCart={handleAddToCart} />} />
           <Route exact path="/carrito" element={<Cart cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} />} />    
+          <Route exact path="/checkout" element={<Checkout cart={cart} />} />    
         </Routes>
 
-        <Footer />
+        <Notification message={message} />
 
       </div>
     </Router>

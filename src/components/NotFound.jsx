@@ -9,13 +9,13 @@ const StyledNotFound = styled.div`
   align-items: center;
 
   & h3 {
-    font-size: 3rem;
+    font-size: 2rem;
     color: #222;
     text-align: center;
   }
 
   & p {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: #222;
     text-align: center;
   }
