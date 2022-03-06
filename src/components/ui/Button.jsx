@@ -8,7 +8,7 @@ const StyledButton = styled.button`
   font-weight: bold;
   border: 2px solid ${props => props.disabled ? '#e6e6e6' : '#408499'};
   border-radius: 5px;
-  height: 4rem;
+  height: 3rem;
   width: 100%;
   cursor: pointer;
   transition: all 300ms ease-in-out;

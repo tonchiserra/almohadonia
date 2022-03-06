@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 
+import CoverPage from './CoverPage';
 import Product from './Product';
 import SearchInput from './SearchInput';
 import ProductsFilter from './ProductsFilter';
@@ -47,7 +48,6 @@ const ProductsContainer = styled.div`
 
 const ProductsList = styled.section`
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
@@ -56,7 +56,6 @@ const ProductsList = styled.section`
 
   @media screen and (min-width: 500px){
     & {
-      flex-direction: row;
       align-items: unset;
     }
   }
@@ -78,6 +77,8 @@ const Products = ({ products, showDetails, applyFilter }) => {
 
   return(
     <ProductsContainer>
+
+      <CoverPage />
  
       <div className='filters-container'>
         <SearchInput />

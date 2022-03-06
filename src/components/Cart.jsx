@@ -12,15 +12,6 @@ const CartContainer = styled.div`
   padding-bottom: 7rem;
   background-color: #fff;
 
-  & > h2 {
-    font-size: 1.5rem;
-    font-weight: normal;
-    padding: 0;
-    margin: 0 0 1rem 0;
-    text-align: center;
-    font-weight: bold;
-  }
-
   .product-list {
     display: flex;
     flex-direction: column;
@@ -97,7 +88,6 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart }) => {
 
   return(
     <CartContainer>
-      <h2>Carrito</h2>
       
       {cart.total_items === 0 
         ? <div className="no-products-container">

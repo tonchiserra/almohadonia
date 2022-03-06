@@ -1,11 +1,12 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import CartBtn from './CartBtn';
 
 import BarsIcon from '../assets/bars.svg';
 import CrossIcon from '../assets/cross.svg';
-import BrandIcon from '../assets/brand.svg';
+import BackIcon from '../assets/back.svg';
 
 const Header = styled.header`
   position: sticky;
@@ -57,16 +58,24 @@ const Header = styled.header`
     padding: 0;
   }
 
-  .brand {
+  h1 {
     color: var(--first-color);
     margin: 0;
+    padding: 0;
     transition: all 300ms ease-in-out;
-    font-size: 1.5rem;
-    height: 4rem;
+    font-size: 2rem;
+    font-family: 'Varela Round', sans-serif;
   }
 
-  .brand:hover {
+  h1:hover {
     opacity: .75;
+  }
+
+  h3 {
+    color: #222;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
   }
 
   @media screen and (min-width: 1200px){
@@ -155,6 +164,10 @@ const Menu = styled.div`
 `;
 
 const Navbar = ({ totalItems }) => {
+  const [title, setTitle] = useState('');
+  const [back, setBack] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleMenu = (n) => {
     let $menu = document.getElementById("menu");
@@ -177,13 +190,41 @@ const Navbar = ({ totalItems }) => {
     })
   }
 
+  useEffect(() => {
+    switch (location.pathname){
+      case '/carrito':
+        setTitle('Carrito');
+        setBack(true);
+        break;
+      case '/checkout':
+        setTitle('Checkout');
+        setBack(true);
+        break;
+      case '/detalle':
+        setBack(true);
+        break;
+      default:
+        setTitle('Almohadonia')
+        setBack(false);
+        break;
+    }
+  }, [location]);
+
   return(
     <Header>
       <div className="container">
-        <button id="bars-btn" className="menu-btn" onClick={() => handleMenu('0')}><img src={BarsIcon} alt="Menu" /></button>
-        <button id="cross-btn" className="menu-btn" onClick={() => handleMenu('-100vw')}><img src={CrossIcon} alt="Menu" /></button>
-        
-        <Link to="/"><img className="brand" src={BrandIcon} alt="Almohadonia" /></Link>
+        {back
+          ? <button className="menu-btn" onClick={() => navigate(-1)}><img src={BackIcon} alt="Back" /></button>
+          : <>
+              <button id="bars-btn" className="menu-btn" onClick={() => handleMenu('0')}><img src={BarsIcon} alt="Menu" /></button>
+              <button id="cross-btn" className="menu-btn" onClick={() => handleMenu('-100vw')}><img src={CrossIcon} alt="Menu" /></button>
+            </>
+        }
+      
+        {title === 'Almohadonia' 
+          ? <Link to="/"><h1>{title}</h1></Link>
+          : <h3>{title}</h3>
+        }
 
         <Menu id="menu">
           <nav>

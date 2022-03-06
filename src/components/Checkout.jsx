@@ -31,7 +31,6 @@ const Checkout = ({ cart }) => {
 
   return(
     <CheckoutContainer>
-      <h2>Checkout</h2>
 
       <Stepper activeStep={activeStep} steps={steps} />
 
