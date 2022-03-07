@@ -7,6 +7,13 @@ import CartBtn from './CartBtn';
 import BarsIcon from '../assets/bars.svg';
 import CrossIcon from '../assets/cross.svg';
 import BackIcon from '../assets/back.svg';
+import AccountIcon from '../assets/account.svg';
+import FavoritesIcon from '../assets/heart_fill.svg';
+import LoginIcon from '../assets/login.svg';
+import LogoutIcon from '../assets/logout.svg';
+import ProductsIcon from '../assets/products.svg';
+import SignupIcon from '../assets/signup.svg';
+import AboutIcon from '../assets/about.svg';
 
 const Header = styled.header`
   position: sticky;
@@ -112,6 +119,7 @@ const Menu = styled.div`
     justify-content: flex-start;
     align-items: center;
     width: 100vw;
+    padding-left: 3rem;
   }
 
   & > nav > a {
@@ -121,10 +129,18 @@ const Menu = styled.div`
     background-color: #fff;
     color: #222;
     transition: all 300ms ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
   }
 
   & > nav > a:hover {
     background-color: #e6e6e6;
+  }
+
+  .icon {
+
   }
 
   @media screen and (min-width: 1200px){
@@ -145,6 +161,7 @@ const Menu = styled.div`
       align-items: center;
       width: unset;
       gap: 2rem;
+      padding-left: unset;
     }
 
     & > nav > a {
@@ -154,11 +171,16 @@ const Menu = styled.div`
       background-color: unset;
       font-size: 1rem;
       color: #222;
+      display: unset;
     }
 
     & > nav > a:hover {
       background-color: unset;
       opacity: .75;
+    }
+
+    .icon {
+      display: none;
     }
   }
 `;
@@ -228,10 +250,13 @@ const Navbar = ({ totalItems }) => {
 
         <Menu id="menu">
           <nav>
-            <Link id="link" to="/productos">Productos</Link>
-            <Link id="link" to="/cuenta">Cuenta</Link>
-            <Link id="link" to="/favoritos">Favoritos</Link>
-            <Link id="link" to="/acerca">Acerca</Link>
+            <Link id="link" to="/productos"><img className="icon" src={ProductsIcon} alt="#" />Productos</Link>
+            <Link id="link" to="/cuenta"><img className="icon" src={AccountIcon} alt="#" />Cuenta</Link>
+            <Link id="link" to="/favoritos"><img className="icon" src={FavoritesIcon} alt="#" />Favoritos</Link>
+            <Link id="link" to="/acerca"><img className="icon" src={AboutIcon} alt="#" />Acerca</Link>
+            <Link id="link" to="/login"><img className="icon" src={LoginIcon} alt="#" />Log in</Link>
+            <Link id="link" to="/signup"><img className="icon" src={SignupIcon} alt="#" />Sign up</Link>
+            <Link id="link" to="/logout"><img className="icon" src={LogoutIcon} alt="#" />Log out</Link>
           </nav>
         </Menu>
 
