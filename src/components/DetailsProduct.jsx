@@ -201,7 +201,7 @@ const DetailsProduct = ({ details, onAddToCart }) => {
         <div className="price-container">
           <p className="price">{details.price.formatted_with_symbol}</p>
           <div className="btns">
-            <Button secondary>Comprar ahora</Button>
+            <Button secondary onClick={() => alert("Aún estamos bajo desarrollo. Gracias.")}>Comprar ahora</Button>
             <Button onClick={() => onAddToCart(details.id, 1)}>Añadir al carrito</Button>
           </div>
         </div>

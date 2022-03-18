@@ -9,7 +9,7 @@ import Products from './components/Products';
 import DetailsProduct from './components/DetailsProduct';
 import Cart from './components/Cart';
 import NotFound from './components/NotFound';
-import Checkout from './components/Checkout';
+import Checkout from './components/checkout/Checkout';
 import Notification from './components/ui/Notification';
 
 
@@ -72,6 +72,7 @@ const App = () => {
   }
 
   useEffect(() => {
+    alert("Hola! Esto es un proyecto ficticio. NO es una tienda real. Gracias.");
     fetchProducts();
     fetchCart();
   }, []);

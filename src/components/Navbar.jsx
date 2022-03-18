@@ -117,15 +117,13 @@ const Menu = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: left;
     width: 100vw;
-    padding-left: 3rem;
+    padding: 0 1rem;
   }
 
   & > nav > a {
-    padding: 1rem 0;
-    width: 100%;
-    text-align: center;
+    padding: 1rem;
     background-color: #fff;
     color: #222;
     transition: all 300ms ease-in-out;
@@ -133,6 +131,7 @@ const Menu = styled.div`
     align-items: center;
     justify-content: flex-start;
     gap: 1rem;
+    border-radius: 5px;
   }
 
   & > nav > a:hover {

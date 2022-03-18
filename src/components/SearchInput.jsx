@@ -56,7 +56,7 @@ const StyledField = styled(Field)`
   margin: 0;
   padding: 0 3rem 0 .5rem;
   font-size: 14px;
-  border: 1px solid #fff;
+  border: 1px solid #f4f4f4;
   transition: all 300ms ease-in-out;
 
   &:hover {
