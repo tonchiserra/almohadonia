@@ -9,6 +9,11 @@ const StyledTextInput = styled.div`
     gap: .2rem;
   }
 
+  .label {
+    display: flex;
+    gap: 1rem;
+  }
+
   label { 
     font-size: 14px;
   }
@@ -33,7 +38,8 @@ const StyledTextInput = styled.div`
   }
 
   .error {
-    
+    font-size: 12px;
+    color: red;
   }
 `;
 
@@ -42,9 +48,14 @@ const TextInput = ({ label, ...props }) => {
 
   return(
     <StyledTextInput>
-      <label>{label}</label>
-      <input {...field} {...props} />
-      {meta.touched && meta.error ? <div className='error'>{meta.error}</div> : null}
+      <div className='label'>
+        <label>{label}</label>
+        {meta.touched && meta.error ? <div className='error'>{meta.error}</div> : null}
+      </div>
+      {meta.touched && meta.error 
+        ? <input {...field} {...props} style={{ border: '1px solid red' }} />
+        : <input {...field} {...props} />
+      }
     </StyledTextInput>
   );
 }

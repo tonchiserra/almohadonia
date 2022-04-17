@@ -38,7 +38,7 @@ const CoverPageContainer = styled.div`
 const CoverPage = () => {
   return(
     <CoverPageContainer>
-      <h3>Todo lo que buscas en un solo lugar</h3>
+      <h3>Los mejores almohadones en un solo lugar</h3>
       <img src={cover} alt="cover_image" />
     </CoverPageContainer>
   );

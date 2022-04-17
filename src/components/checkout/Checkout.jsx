@@ -16,20 +16,20 @@ const CheckoutContainer = styled.div`
 const steps = ['Dirección de envío', 'Detalles de pago'];
 
 const Checkout = ({ cart }) => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(1);
   const [checkoutToken, setCheckoutToken] = useState(null);
   
   useEffect(() => {
     const generateToken = async () => {
       try {
+        document.getElementById("loader").style.display = "block";
         const token = await commerce.checkout.generateToken(cart.id, { type: 'cart' });
-
         setCheckoutToken(token)
+        document.getElementById("loader").style.display = "none";
       } catch (error) {
         
       }
     }
-
     generateToken();
   }, [cart]);
 
@@ -43,8 +43,8 @@ const Checkout = ({ cart }) => {
   );
 
   const Form = () => activeStep === 0
-    ? <AdressForm checkoutToken={checkoutToken} />
-    : <PaymentForm />
+    ? <AdressForm checkoutToken={checkoutToken} setActiveStep={setActiveStep} />
+    : <PaymentForm setActiveStep={setActiveStep} />
 
   return(
     <CheckoutContainer>
