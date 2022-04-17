@@ -119,15 +119,15 @@ const AdressForm = ({ checkoutToken, setActiveStep }) => {
     }
 
     if(!values.shippingcountry){
-      errors.shippingcountry = 'Campo vacío. Seleccione país de envío'
+      errors.shippingcountry = 'Campo vacío. Seleccione país de envío';
     }
 
     if(!values.shippingsubdivision){
-      errors.shippingsubdivision = 'Campo vacío. Seleccione subdivisión'
+      errors.shippingsubdivision = 'Campo vacío. Seleccione subdivisión';
     }
 
     if(!values.shippingoption){
-      errors.shippingoption = 'Campo vacío. Seleccione opción de envío'
+      errors.shippingoption = 'Campo vacío. Seleccione opción de envío';
     }
 
     return errors;
@@ -157,23 +157,23 @@ const AdressForm = ({ checkoutToken, setActiveStep }) => {
         <div className="select-container">
           <SelectInput
             label='País de envío'
-            value={shippingCountry}
             name='shippingcountry'
             typeOptions={countries}
+            handleChange={setShippingContry}
           />
 
           <SelectInput
             label='Subdivisión de envío'
-            value={shippingSubdivision}
             name='shippingsubdivision'
             typeOptions={subdivisions}
+            handleChange={setShippingSubdivision}
           />
 
           <SelectInput
             label='Opción de envío'
-            value={shippingOption}
             name='shippingoption'
             typeOptions={options}
+            handleChange={setShippingOption}
           />
         </div>
 

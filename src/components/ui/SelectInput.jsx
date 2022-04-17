@@ -49,19 +49,17 @@ const StyledSelectInput = styled.div`
   }
 `;
 
-const SelectInput = ({ label, typeOptions, ...props }) => {
+const SelectInput = ({ label, typeOptions, handleChange, ...props }) => {
   const [field, meta] = useField(props);
-  
+
+  handleChange(field.value);
+
   return(
     <StyledSelectInput>
       <div className='label'>
         <label>{label}</label>
         {meta.touched && meta.error ? <div className='error'>{meta.error}</div> : null}
       </div>
-
-      {/* 
-        Agregar evento onChange en select asi se cambia el state del valor de ese select y desaparece el error
-      */}
 
       <select {...field} {...props}
         style={ meta.touched && meta.error ? {border: '1px solid red'} : null }
