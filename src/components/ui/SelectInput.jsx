@@ -7,11 +7,15 @@ const StyledSelectInput = styled.div`
     align-items: left;
     gap: .2rem;
     width: 100%;
-    margin-top: 1rem;
+    margin: 0;
 
   .label {
     display: flex;
     gap: 1rem;
+  }
+
+  label {
+    font-size: 14px;
   }
 
   .error {
@@ -28,6 +32,7 @@ const StyledSelectInput = styled.div`
     border: 1px solid #f4f4f4;
     background-color: #f4f4f4;
     transition: all 300ms ease-in-out;
+    margin: 0;
   }
 
   select:hover {

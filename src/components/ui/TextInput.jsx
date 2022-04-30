@@ -54,7 +54,7 @@ const TextInput = ({ label, ...props }) => {
       </div>
       {meta.touched && meta.error 
         ? <input {...field} {...props} style={{ border: '1px solid red' }} />
-        : <input {...field} {...props} />
+        : <input placeholder={`Ingresa tu ${label}`} {...field} {...props} />
       }
     </StyledTextInput>
   );

@@ -16,7 +16,7 @@ const CheckoutContainer = styled.div`
 const steps = ['Dirección de envío', 'Detalles de pago'];
 
 const Checkout = ({ cart }) => {
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
   
   useEffect(() => {

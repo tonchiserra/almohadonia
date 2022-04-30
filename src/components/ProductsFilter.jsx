@@ -20,6 +20,18 @@ const FilterContainer = styled.div`
     display: none;
   }
 
+  select {
+    background-color: #f4f4f4;
+    border: 1px solid #f4f4f4;
+    height: 3rem;
+    padding: 0 .5rem;
+    border-radius: 5px;
+  }
+
+  select:hover {
+    border: 1px solid #c4c4c4;
+  }
+
   & .viewBtns {
     display: flex;
     justify-content: space-between;

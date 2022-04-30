@@ -54,16 +54,18 @@ const PaymentForm = ({ setActiveStep }) => {
     <Formik
       initialValues={{}}
       //validate={}
-      onSubmit={values => console.log(values)}
+      onSubmit={ () => alert("Aún estamos bajo desarrollo. Gracias.")}
     >
       <StyledForm>
-        <div className="input-container">
-          <TextInput name='firstname' label='Nombre' />
-        </div>
-
-        <div className="select-container">
         
-        </div>
+          <div className="input-container">
+            <TextInput name='dni' label='DNI' />
+          </div>
+        {/*
+          <div className="select-container">
+        
+          </div>
+        */}
 
         <div className="buttons-container">
           <Button type='submit' >Aceptar</Button>

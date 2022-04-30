@@ -26,13 +26,14 @@ const StyledForm = styled(Form)`
     grid-template-columns: 1fr;
     gap: 1rem;
     width: 100%;
+    margin-bottom: 1rem;
   }
 
   .buttons-container {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     width: 100%;
   }
 
@@ -135,7 +136,7 @@ const AdressForm = ({ checkoutToken, setActiveStep }) => {
 
   const nextStep = (values) => {
     setActiveStep(1);
-    console.log(values);
+    //console.log(values);
   }
 
   return(
